@@ -12,5 +12,5 @@ async function handleRegistration() {
 </script>
 
 <template>
-    Welcome
+    <div class="text-blue-500">Welcome</div>
 </template>
