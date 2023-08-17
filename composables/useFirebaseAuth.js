@@ -9,6 +9,10 @@ export default function () {
   const { $auth } = useNuxtApp();
   const { addNewUser, getUserInfo } = useFirebaseStorage();
 
+  const getCurrentUserLocalStorage = () => {
+    return nuxtStorage.localStorage.getData("user")
+  }
+
   const makeUser = (username, email, uid) => {
     return {
       username: username,
@@ -57,6 +61,7 @@ export default function () {
   };
 
   return {
+    getCurrentUserLocalStorage,
     registerUser,
     loginUser,
     logoutUser,
