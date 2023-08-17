@@ -20,19 +20,19 @@ async function handleRegistration() {
             setTimeout(() => {
                 registered.value = false;
                 navigateTo({ path: '/' })
-            }, 3000);
+            }, 1000);
         }
         else {
             failed.value = true
             setTimeout(() => {
                 failed.value = false
-            }, 3000);
+            }, 1000);
         }
     } catch (error) {
         failed.value = true
         setTimeout(() => {
             failed.value = false
-        }, 3000);
+        }, 1000);
     }
 }
 </script>

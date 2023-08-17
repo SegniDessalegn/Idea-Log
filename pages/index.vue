@@ -1,14 +1,5 @@
 <script setup>
-const { registerUser } = useFirebaseAuth() // auto-imported
 
-const creds = reactive({
-  email: "",
-  password: ""
-})
-
-async function handleRegistration() {
-  await registerUser(creds.email, creds.password)
-}
 </script>
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen">

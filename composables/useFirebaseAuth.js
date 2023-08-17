@@ -38,12 +38,18 @@ export default function () {
   };
 
   const loginUser = async (email, password) => {
-    signInWithEmailAndPassword($auth, email, password)
-      .then(async (cred) => {
-        const userInfo = await getUserInfo(cred.user.uid)
-        nuxtStorage.localStorage.setData("user", makeUser(userInfo.username, userInfo.email, cred.user.uid), 30, "d");
-        nuxtStorage.localStorage.getData("user")
-      })
+      return signInWithEmailAndPassword($auth, email, password).then(async (cred) => {
+      const userInfo = await getUserInfo(cred.user.uid);
+      nuxtStorage.localStorage.setData(
+        "user",
+        makeUser(userInfo.username, userInfo.email, cred.user.uid),
+        30,
+        "d"
+      );
+      return true
+    }).catch((error)=>{
+      return false
+    })
   };
 
   const logoutUser = () => {
