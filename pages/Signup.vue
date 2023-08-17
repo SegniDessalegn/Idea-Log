@@ -3,8 +3,9 @@ import { ref } from 'vue';
 
 const { registerUser } = useFirebaseAuth();
 
-const email = ref('');
-const password = ref('');
+const username = ref('a');
+const email = ref('a@gmail.com');
+const password = ref('12345678');
 const loading = ref(false)
 const registered = ref(false)
 const failed = ref(false)
@@ -12,7 +13,7 @@ const failed = ref(false)
 async function handleRegistration() {
     try {
         loading.value = true
-        const result = await registerUser(email.value, password.value);
+        const result = await registerUser(email.value, password.value, username.value);
         loading.value = false
         if (result) {
             registered.value = true
@@ -39,6 +40,7 @@ async function handleRegistration() {
 <template>
     <div class="flex flex-col bg-gray-100 p-10 mt-20 rounded-lg items-center w-fit mx-auto gap-5">
         <div class="text-lg">Welcome, <b>Signup</b> to Idea Log</div>
+        <input v-model="username" type="text" placeholder="Username" class="input input-bordered input-primary w-full max-w-xs" />
         <input v-model="email" type="text" placeholder="Email" class="input input-bordered input-primary w-full max-w-xs" />
         <input v-model="password" type="password" placeholder="Password"
             class="input input-bordered input-primary w-full max-w-xs" />
