@@ -5,7 +5,7 @@ const { getCurrentUserLocalStorage } = useFirebaseAuth()
 const canShow = ref(false);
 onBeforeMount(() => {
     if (!getCurrentUserLocalStorage()) {
-        navigateTo("/login")
+        navigateTo("login")
     } else {
         canShow.value = true
     }
