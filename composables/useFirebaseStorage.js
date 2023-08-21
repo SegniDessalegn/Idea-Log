@@ -50,8 +50,17 @@ export default function () {
     );
   }
 
+  async function getIdeas(){
+    const uid = nuxtStorage.localStorage.getData("user").uid;
+    console.log("user id", uid)
+    const db = getFirestore();
+    var userRef = doc(db, "users", uid);
+    return (await getDoc(userRef)).data().ideas
+  }
+
   return {
     getUserInfo,
     addNewUser,
+    getIdeas
   };
 }

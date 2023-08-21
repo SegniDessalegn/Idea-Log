@@ -1,13 +1,19 @@
 <script setup>
-import { onBeforeMount } from "vue"
-const { getCurrentUserLocalStorage } = useFirebaseAuth()
+import { onMounted, ref } from "vue"
 
+const { getCurrentUserLocalStorage } = useFirebaseAuth()
+const { getIdeas } = useFirebaseStorage()
+
+const ideas = ref([])
 const canShow = ref(false);
-onBeforeMount(() => {
+onMounted(() => {
     if (!getCurrentUserLocalStorage()) {
         navigateTo("login")
     } else {
         canShow.value = true
+        getIdeas().then((received_ideas) => {
+            ideas.value = received_ideas
+        }).catch((error) => console.log(error))
     }
 })
 </script>
@@ -24,30 +30,9 @@ onBeforeMount(() => {
             <div class="btn btn-primary mx-10">Add New</div>
         </div>
         <div class="flex justify-center flex-wrap">
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
-            <CardIdea />
+            <div v-for="(idea, index) in ideas" :key="index">
+                <CardIdea :title="idea.title" :description="idea.description" />
+            </div>
         </div>
     </div>
     <div v-else class="min-h-screen flex justify-center items-center">
